@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template | TechStore Promo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #f8fafc;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .email-wrapper {
+            max-width: 640px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Header */
+        .email-header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            padding: 40px 32px;
+            text-align: center;
+            color: white;
+        }
+        
+        .brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .brand-logo i {
+            font-size: 28px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .header-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Content */
+        .email-content {
+            padding: 40px 32px;
+        }
+        
+        .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 24px;
+        }
+        
+        .intro-text {
+            color: #475569;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+        
+        /* A/B Testing Banner */
+        .ab-test-section {
+            background: linear-gradient(135deg, #f1f5f9 0%, #f8fafc 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .ab-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #334155;
+        }
+        
+        .ab-title i {
+            color: #4f46e5;
+            font-size: 20px;
+        }
+        
+        .ab-variants {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .ab-variant {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .ab-variant:hover {
+            border-color: #4f46e5;
+            transform: translateY(-2px);
+        }
+        
+        .ab-variant.active {
+            border-color: #4f46e5;
+            background: #f8fafc;
+        }
+        
+        .variant-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .variant-title i {
+            color: #4f46e5;
+        }
+        
+        .variant-desc {
+            font-size: 14px;
+            color: #64748b;
+        }
+        
+        /* Products Grid */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 40px 0 24px 0;
+        }
+        
+        .section-title i {
+            color: #4f46e5;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: #c7d2fe;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+        
+        .product-image i {
+            font-size: 48px;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        
+        .price-current {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+        
+        .price-old {
+            font-size: 14px;
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+        
+        .add-to-cart-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #4338ca;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            border-radius: 16px;
+            color: white;
+        }
+        
+        .cta-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            color: #4f46e5;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Interactive Cart */
+        .cart-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .cart-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .cart-header i {
+            color: #4f46e5;
+            font-size: 20px;
+        }
+        
+        #cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            font-weight: 600;
+            font-size: 18px;
+            color: #1e293b;
+        }
+        
+        /* Footer */
+        .email-footer {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 40px 32px;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-section h4 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-section h4 i {
+            color: #4f46e5;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .social-link:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid #334155;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .email-wrapper {
+                border-radius: 12px;
+            }
+            
+            .email-header,
+            .email-content {
+                padding: 32px 24px;
+            }
+            
+            .ab-variants {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 32px 24px;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Email Client Specific */
+        @media screen and (max-width: 480px) {
+            .email-wrapper {
+                width: 100% !important;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .email-wrapper {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .add-to-cart-btn,
+            .cta-button {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <!-- Header -->
+        <header class="email-header">
+            <div class="brand-logo">
+                <i class="fas fa-bolt"></i>
+                TechStore
+            </div>
+            <h1 class="header-title">СЕЗОН РАСПРОДАЖ</h1>
+            <p class="header-subtitle">Эксклюзивные предложения только для подписчиков</p>
+        </header>
+
+        <!-- Content -->
+        <main class="email-content">
+            <!-- Greeting -->
+            <h2 class="greeting">Добрый день, Алексей!</h2>
+            <p class="intro-text">
+                Мы подготовили для вас специальную подборку товаров со скидками до 50%. 
+                Эти предложения доступны ограниченное время.
+            </p>
+
+            <!-- A/B Testing Section -->
+            <div class="ab-test-section">
+                <div class="ab-title">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>A/B Тестирование контента</h3>
+                </div>
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 8px;">
+                    Выберите вариант заголовка для тестирования эффективности:
+                </p>
+                
+                <div class="ab-variants">
+                    <div class="ab-variant active" onclick="selectVariant('A')">
+                        <div class="variant-title">
+                            <i class="fas fa-rocket"></i>
+                            <span>Вариант A</span>
+                        </div>
+                        <p class="variant-desc">Срочная распродажа! Осталось 24 часа</p>
+                    </div>
+                    
+                    <div class="ab-variant" onclick="selectVariant('B')">
+                        <div class="variant-title">
+                            <i class="fas fa-crown"></i>
+                            <span>Вариант B</span>
+                        </div>
+                        <p class="variant-desc">Эксклюзивное предложение для подписчиков</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Section -->
+            <div class="section-title">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Рекомендуемые товары</span>
+            </div>
+
+            <div class="products-grid">
+<!-- Product 1 -->
+<div class="product-card">
+    <div class="product-image">
+        <i class="fas fa-laptop"></i>
+    </div>
+    <div class="product-info">
+        <span class="product-category">
+            <i class="fas fa-tag"></i>
+            Электроника
+        </span>
+        <h4 class="product-name">Ноутбук UltraBook Pro</h4>
+        <div class="product-price">
+            <div>
+                <div class="price-current">89 990 ₽</div>
+                <div class="price-old">112 000 ₽</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Ноутбук UltraBook Pro', 89990)">
+                <i class="fas fa-cart-plus"></i>
+                В корзину
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Product 2 -->
+<div class="product-card">
+    <div class="product-image">
+        <i class="fas fa-headphones"></i>
+    </div>
+    <div class="product-info">
+        <span class="product-category">
+            <i class="fas fa-tag"></i>
+            Аудио
+        </span>
+        <h4 class="product-name">Наушники Wireless Pro</h4>
+        <div class="product-price">
+            <div>
+                <div class="price-current">15 990 ₽</div>
+                <div class="price-old">21 000 ₽</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Наушники Wireless Pro', 15990)">
+                <i class="fas fa-cart-plus"></i>
+                В корзину
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Product 3 -->
+<div class="product-card">
+    <div class="product-image">
+        <i class="fas fa-mobile-alt"></i>
+    </div>
+    <div class="product-info">
+        <span class="product-category">
+            <i class="fas fa-tag"></i>
+            Смартфоны
+        </span>
+        <h4 class="product-name">Смартфон X10 Pro</h4>
+        <div class="product-price">
+            <div>
+                <div class="price-current">64 990 ₽</div>
+                <div class="price-old">79 000 ₽</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Смартфон X10 Pro', 64990)">
+                <i class="fas fa-cart-plus"></i>
+                В корзину
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Product 4 -->
+<div class="product-card">
+    <div class="product-image">
+        <i class="fas fa-tablet-alt"></i>
+    </div>
+    <div class="product-info">
+        <span class="product-category">
+            <i class="fas fa-tag"></i>
+            Планшеты
+        </span>
+        <h4 class="product-name">Планшет Pro 12.9"</h4>
+        <div class="product-price">
+            <div>
+                <div class="price-current">74 990 ₽</div>
+                <div class="price-old">89 000 ₽</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Планшет Pro 12.9 дюймов', 74990)">
+                <i class="fas fa-cart-plus"></i>
+                В корзину
+            </button>
+        </div>
+    </div>
+</div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h3 class="cta-title">Не упустите выгодные предложения</h3>
+                <p style="opacity: 0.9; margin-bottom: 8px;">Скидки действуют только до конца недели</p>
+                <a href="#shop-now" class="cta-button">
+                    <i class="fas fa-shopping-cart"></i>
+                    Перейти к покупкам
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Interactive Cart -->
+            <div class="cart-section">
+                <div class="cart-header">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Корзина покупок</h3>
+                </div>
+                <div id="cart-items">
+                    <!-- Cart items will appear here -->
+                </div>
+                <div class="cart-total">
+                    <span>Итого:</span>
+                    <span id="cart-total-amount">0 ₽</span>
+                </div>
+                <button class="add-to-cart-btn" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="checkout()">
+                    <i class="fas fa-credit-card"></i>
+                    Оформить заказ
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="email-footer">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h4><i class="fas fa-info-circle"></i> Информация</h4>
+                    <ul style="list-style: none; color: #cbd5e1;">
+                        <li style="margin-bottom: 8px;">Доставка по всей России</li>
+                        <li style="margin-bottom: 8px;">Гарантия 2 года</li>
+                        <li style="margin-bottom: 8px;">Бесплатный возврат 30 дней</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4><i class="fas fa-headset"></i> Поддержка</h4>
+                    <ul style="list-style: none; color: #cbd5e1;">
+                        <li style="margin-bottom: 8px;">+7 (800) 555-35-35</li>
+                        <li style="margin-bottom: 8px;">support@techstore.ru</li>
+                        <li style="margin-bottom: 8px;">Часы работы: 9:00-21:00</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4><i class="fas fa-share-alt"></i> Социальные сети</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p style="margin-bottom: 8px;">
+                    Вы получили это письмо, потому что подписались на рассылку TechStore.
+                    <a href="#" style="color: #4f46e5; text-decoration: none;">Отписаться</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // A/B Testing
+        function selectVariant(variant) {
+            const variants = document.querySelectorAll('.ab-variant');
+            variants.forEach(v => v.classList.remove('active'));
+            
+            const selected = document.querySelector(`.ab-variant:nth-child(${variant === 'A' ? 1 : 2})`);
+            selected.classList.add('active');
+            
+            const header = document.querySelector('.header-title');
+            if (variant === 'A') {
+                header.textContent = 'СРОЧНАЯ РАСПРОДАЖА! 24 ЧАСА';
+                document.querySelector('.email-header').style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            } else {
+                header.textContent = 'ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ';
+                document.querySelector('.email-header').style.background = 'linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)';
+            }
+        }
+
+        // Shopping Cart
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            cartTotal += price;
+            updateCartDisplay();
+            
+            // Show notification
+            showNotification(`Добавлено: ${productName}`);
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total-amount');
+            
+            cartItems.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <div>
+                        <div style="font-weight: 500;">${item.name}</div>
+                        <div style="font-size: 14px; color: #64748b;">1 шт.</div>
+                    </div>
+                    <div style="font-weight: 600; color: #4f46e5;">
+                        ${item.price.toLocaleString()} ₽
+                    </div>
+                `;
+                cartItems.appendChild(itemEl);
+            });
+            
+            cartTotalEl.textContent = `${cartTotal.toLocaleString()} ₽`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Добавьте товары в корзину');
+                return;
+            }
+            
+            const orderSummary = cart.map(item => 
+                `${item.name} - ${item.price.toLocaleString()} ₽`
+            ).join('\n');
+            
+            alert(`Заказ оформлен!\n\n${orderSummary}\n\nИтого: ${cartTotal.toLocaleString()} ₽`);
+            
+            // Reset cart
+            cart = [];
+            cartTotal = 0;
+            updateCartDisplay();
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #10b981;
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                max-width: 320px;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle" style="font-size: 20px;"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Email analytics simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Email opened at:', new Date().toLocaleTimeString());
+            
+            // Track link clicks
+            document.querySelectorAll('a, button').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    const action = this.textContent || this.querySelector('i')?.className || 'click';
+                    console.log(`Email action: ${action}`);
+                    
+                    // Simulate sending analytics
+                    if (this.href && this.href.startsWith('http')) {
+                        setTimeout(() => {
+                            console.log(`Redirected to: ${this.href}`);
+                        }, 100);
+                    }
+                });
+            });
+        });
+
+        // Responsive email client fixes
+        if (window.innerWidth <= 480) {
+            document.querySelector('.email-wrapper').style.width = '100%';
+        }
+    </script>
+</body>
+</html>   
