@@ -1,16 +1,12 @@
 {
-  "name": "techstore-email-template",
+  "name": "email-newsletter-store",
   "version": "1.0.0",
   "description": "Modern responsive email template for e-commerce",
   "scripts": {
     "build": "mjml template.mjml -o index.html",
-    "watch": "mjml --watch template.mjml -o index.html",
-    "test": "litmus test config.yml"
+    "watch": "mjml --watch template.mjml -o index.html"
   },
   "dependencies": {
     "mjml": "^4.14.1"
-  },
-  "devDependencies": {
-    "mjml-browser": "^1.2.0"
   }
 }
