@@ -1,12 +1,8 @@
 {
   "name": "email-newsletter-store",
   "version": "1.0.0",
-  "description": "Modern responsive email template for e-commerce",
+  "description": "Modern responsive email template",
   "scripts": {
-    "build": "mjml template.mjml -o index.html",
-    "watch": "mjml --watch template.mjml -o index.html"
-  },
-  "dependencies": {
-    "mjml": "^4.14.1"
+    "build": "echo 'No build needed'"
   }
 }
